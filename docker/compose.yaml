@@ -1,0 +1,31 @@
+services:
+  php-fpm:
+    build: .
+    restart: always
+    volumes:
+      - ../:${REMOTE_PATH}
+    depends_on:
+      - db
+      - nginx
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ../:${REMOTE_PATH}
+      - ./nginx:/etc/nginx/conf.d
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - ./storage/mysql:/var/lib/mysql
+    ports:
+      - ${DB_PORT}:3306
+
+networks:
+  default:
+    name: localhost-network
+    external: true
