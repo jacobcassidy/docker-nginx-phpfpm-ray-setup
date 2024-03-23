@@ -27,6 +27,7 @@ For all features to work, you must do a one-time setup of the following:
 2. Create a stand-alone reverse proxy network (to use multiple local domains on the standard 80 or 443 ports):
     - In the parent directory where you want to store your network files (such as `/Users/Username/Projects/Assets/Docker/`), run: `git clone git@github.com:jacobcassidy/docker-localhost-network.git`.
     - From the `docker-localhost-network` directory you just cloned, run: `docker compose up -d` to build and start the container.
+3. For the local Ray desktop app to communicate with the remote Docker server, you must add `127.0.0.1 host.docker.internal` to your local `/etc/hosts` file.
 
 ### Continued/Additional Setup
 
